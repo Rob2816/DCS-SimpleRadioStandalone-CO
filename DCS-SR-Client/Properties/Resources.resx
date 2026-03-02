@@ -567,10 +567,13 @@ DCS In-game SRS Overlay</value>
   <data name="IntercomStartTransmitEffect" xml:space="preserve">
     <value>Intercom Transmit Start Effect</value>
   </data>
-  <data name="LotATCConnectionStatusLabel" xml:space="preserve">
+	<data name="LotATCConnectionStatusLabel" xml:space="preserve">
     <value>LotATC</value>
   </data>
-  <data name="MicAGC" xml:space="preserve">
+	<data name="CODCSAirspaceConnectionStatusLabel" xml:space="preserve">
+    <value>DCS Airspace</value>
+  </data>
+	<data name="MicAGC" xml:space="preserve">
     <value>Microphone Automatic Gain Control</value>
   </data>
   <data name="IncomingAudioAGC" xml:space="preserve">
@@ -1297,5 +1300,9 @@ Recommended: 20000</value>
   </data>
   <data name="InstructorMode" xml:space="preserve">
     <value>Instructor Mode (Server setting needed + EAM Only)</value>
+  </data>
+  <data name="CODCSAirspaceConnectionStatusLabel" xml:space="preserve">
+    <value>DCS Airspace</value>
+    <comment>DCS Airspace</comment>
   </data>
 </root>

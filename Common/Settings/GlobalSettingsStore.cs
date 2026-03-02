@@ -79,6 +79,10 @@ public enum GlobalSettingsKeys
     LotATCIncomingUDP, //10710
     LotATCOutgoingUDP, //10711
 
+    //Combined Ops DCS Airspace
+    CODCSAirspaceIncomingUDP, //10810
+    CODCSAirspaceOutgoingUDP, //10811
+
     SettingsProfiles,
     AutoSelectSettingsProfile,
 
@@ -86,6 +90,8 @@ public enum GlobalSettingsKeys
     VAICOMTXInhibitEnabled,
 
     LotATCHeightOffset,
+
+    CODCSAirspaceHeightOffset, // 50
 
     DCSAutoConnectUDP, // 5069
     ShowTransmitterName,
@@ -325,6 +331,10 @@ public class GlobalSettingsStore
         { GlobalSettingsKeys.LotATCIncomingUDP.ToString(), "10710" },
         { GlobalSettingsKeys.LotATCOutgoingUDP.ToString(), "10711" },
         { GlobalSettingsKeys.LotATCHeightOffset.ToString(), "50" },
+
+        { GlobalSettingsKeys.CODCSAirspaceIncomingUDP.ToString(), "10810" },
+        { GlobalSettingsKeys.CODCSAirspaceOutgoingUDP.ToString(), "10811" },
+        { GlobalSettingsKeys.CODCSAirspaceHeightOffset.ToString(), "50" },
 
 
         { GlobalSettingsKeys.VAICOMIncomingUDP.ToString(), "33501" },

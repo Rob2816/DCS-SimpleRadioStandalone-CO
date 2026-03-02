@@ -1416,16 +1416,29 @@ namespace Ciribob.DCS.SimpleRadio.Standalone.Client.Properties {
                 return ResourceManager.GetString("IntercomStartTransmitEffect", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to LotATC.
         /// </summary>
-        public static string LotATCConnectionStatusLabel {
-            get {
+        public static string LotATCConnectionStatusLabel
+        {
+            get
+            {
                 return ResourceManager.GetString("LotATCConnectionStatusLabel", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Combined Ops DCS Airspace.
+        /// </summary>
+        public static string CODCSAirspaceConnectionStatusLabel
+        {
+            get
+            {
+                return ResourceManager.GetString("CODCSAirspaceConnectionStatusLabel", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to 麦克风自动音量增益控制.
         /// </summary>

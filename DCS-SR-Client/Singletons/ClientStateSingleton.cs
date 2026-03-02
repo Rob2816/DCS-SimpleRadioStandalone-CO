@@ -57,6 +57,7 @@ public sealed class ClientStateSingleton : PropertyChangedBaseClass, IHandle<TCP
         {
             NotifyPropertyChanged("IsGameConnected");
             NotifyPropertyChanged("IsLotATCConnected");
+            NotifyPropertyChanged("IsCODCSAirspaceConnected");
             NotifyPropertyChanged("ExternalAWACSModeConnected");
         };
         _timer.Start();
@@ -89,6 +90,9 @@ public sealed class ClientStateSingleton : PropertyChangedBaseClass, IHandle<TCP
 
     // Timestamp for the last time 
     public long LotATCLastReceived { get; set; }
+
+    // Timestamp for the last time 
+    public long CODCSAirspaceLastReceived { get; set; }
 
     //store radio channels here?
     public PresetChannelsViewModel[] FixedChannels { get; }
@@ -147,6 +151,8 @@ public sealed class ClientStateSingleton : PropertyChangedBaseClass, IHandle<TCP
     }
 
     public bool IsLotATCConnected => LotATCLastReceived >= DateTime.Now.Ticks - 50000000;
+
+    public bool IsCODCSAirspaceConnected => CODCSAirspaceLastReceived >= DateTime.Now.Ticks - 50000000;
 
     public bool IsGameGuiConnected => DcsGameGuiLastReceived >= DateTime.Now.Ticks - 100000000;
 
@@ -216,10 +222,21 @@ public sealed class ClientStateSingleton : PropertyChangedBaseClass, IHandle<TCP
         return true;
     }
 
+    public bool ShouldUseCODCSAirspacePosition()
+    {
+        if (!IsCODCSAirspaceConnected) return false;
+
+        if (IsGameExportConnected)
+            if (DcsPlayerRadioInfo.inAircraft)
+                return false;
+
+        return true;
+    }
+
     public void ClearPositionsIfExpired()
     {
-        //not game or Lotatc - clear it!
-        if (!IsLotATCConnected && !IsGameExportConnected)
+        //not game or Lotatc or Combined Ops DCS Airspace - clear it!
+        if (!IsLotATCConnected && !IsCODCSAirspaceConnected && !IsGameExportConnected)
             PlayerCoaltionLocationMetadata.LngLngPosition = new LatLngPosition();
     }
 
