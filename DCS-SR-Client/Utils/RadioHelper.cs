@@ -3,6 +3,7 @@ using System.Linq;
 using Ciribob.DCS.SimpleRadio.Standalone.Client.Network.DCS.Models.DCSState;
 using Ciribob.DCS.SimpleRadio.Standalone.Client.Settings.RadioChannels;
 using Ciribob.DCS.SimpleRadio.Standalone.Client.Singletons;
+using Ciribob.DCS.SimpleRadio.Standalone.Client.UI.ClientWindow.AwacsRadioOverlayWindow;
 using Ciribob.DCS.SimpleRadio.Standalone.Common.Helpers;
 using Ciribob.DCS.SimpleRadio.Standalone.Common.Models.Player;
 using Ciribob.DCS.SimpleRadio.Standalone.Common.Settings;
@@ -398,6 +399,96 @@ public static class RadioHelper
                 //make radio data stale to force resysnc
                 ClientStateSingleton.Instance.LastSent = 0;
             }
+    }
+
+    public static void SetRetransmit(int radioId, bool enabled)
+    {
+        var radio = GetRadio(radioId);
+
+        if (radio != null && radioId > 0)
+            if (radio.rtMode == DCSRadio.RetransmitMode.OVERLAY)
+            {
+                radio.retransmit = enabled;
+
+                //make radio data stale to force resysnc
+                ClientStateSingleton.Instance.LastSent = 0;
+            }
+    }
+
+    public static void ToggleGlobalSimultaneousTransmission()
+    {
+        var dcsPlayerRadioInfo = ClientStateSingleton.Instance.DcsPlayerRadioInfo;
+        if (dcsPlayerRadioInfo != null)
+        {
+            dcsPlayerRadioInfo.simultaneousTransmission = !dcsPlayerRadioInfo.simultaneousTransmission;
+
+            if (!dcsPlayerRadioInfo.simultaneousTransmission)
+            {
+                foreach (var radioBase in dcsPlayerRadioInfo.radios)
+                {
+                    var radio = radioBase;
+                    radio.simul = false;
+                }
+            }
+        }
+    }
+
+    public static void SetGlobalSimultaneousTransmission(bool enabled)
+    {
+        var dcsPlayerRadioInfo = ClientStateSingleton.Instance.DcsPlayerRadioInfo;
+        if (dcsPlayerRadioInfo != null)
+        {
+            dcsPlayerRadioInfo.simultaneousTransmission = enabled;
+
+            if (!dcsPlayerRadioInfo.simultaneousTransmission)
+            {
+                foreach (var radioBase in dcsPlayerRadioInfo.radios)
+                {
+                    var radio = radioBase;
+                    radio.simul = false;
+                }
+            }
+        }
+    }
+
+    public static void ToggleSimul(int radioId)
+    {
+        var dcsPlayerRadioInfo = ClientStateSingleton.Instance.DcsPlayerRadioInfo;
+        if (dcsPlayerRadioInfo != null)
+        {
+            if (dcsPlayerRadioInfo.simultaneousTransmission)
+            {
+                var radio = GetRadio(radioId);
+
+                if (radio != null && radioId > 0)
+                {
+                    radio.simul = !radio.simul;
+
+                    //make radio data stale to force resysnc
+                    ClientStateSingleton.Instance.LastSent = 0;
+                }
+            }
+        }
+    }
+
+    public static void SetSimul(int radioId, bool enabled)
+    {
+        var dcsPlayerRadioInfo = ClientStateSingleton.Instance.DcsPlayerRadioInfo;
+        if (dcsPlayerRadioInfo != null)
+        {
+            if (dcsPlayerRadioInfo.simultaneousTransmission)
+            {
+                var radio = GetRadio(radioId);
+
+                if (radio != null && radioId > 0)
+                {
+                    radio.simul = enabled;
+
+                    //make radio data stale to force resysnc
+                    ClientStateSingleton.Instance.LastSent = 0;
+                }
+            }
+        }
     }
 
     public static void RadioVolumeUp(short radioId)
