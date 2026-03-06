@@ -94,7 +94,7 @@ public class UDPCommandHandler
                         RadioHelper.ToggleSimul(message.RadioId);
                     else if (message?.Command == UDPInterfaceCommand.UDPCommandType.RADIO_SIMUL)
                         RadioHelper.SetSimul(message.RadioId, message.Enabled);
-                    else if(message?.Command == UDPInterfaceCommand.UDPCommandType.INTERCOM_CHAN)
+                    else if (message?.Command == UDPInterfaceCommand.UDPCommandType.INTERCOM_CHAN)
                         RadioHelper.SetIntercom(message.RadioId);
                     else
                         Logger.Error("Unknown UDP Command!");
