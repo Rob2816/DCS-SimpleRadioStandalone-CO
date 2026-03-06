@@ -23,7 +23,9 @@ public class UDPInterfaceCommand
         TOGGLE_GLOBAL_SIMULTANEOUS_TRANSMISSION = 16,
         GLOBAL_SIMULTANEOUS_TRANSMISSION = 17,
         TOGGLE_RADIO_SIMUL = 18,
-        RADIO_SIMUL = 19
+        RADIO_SIMUL = 19, 
+        INTERCOM_CHAN = 20
+        // INTERCOM_VOLUME = SET_VOLUME (5) RadioId = 0
     }
 
     public int RadioId { get; set; }

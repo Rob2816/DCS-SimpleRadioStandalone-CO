@@ -526,4 +526,24 @@ public static class RadioHelper
             currentRadio.volume = volume;
         }
     }
+
+    public static void SetIntercom(int chan)
+    {
+        var dcsPlayerRadioInfo = ClientStateSingleton.Instance.DcsPlayerRadioInfo;
+
+        if (dcsPlayerRadioInfo != null && dcsPlayerRadioInfo.IsCurrent() &&
+            dcsPlayerRadioInfo.unitId >= DCSPlayerRadioInfo.UnitIdOffset)
+            try
+            {
+                ClientStateSingleton.Instance.IntercomOffset = chan;
+                dcsPlayerRadioInfo.unitId =
+                    (uint)(DCSPlayerRadioInfo.UnitIdOffset + ClientStateSingleton.Instance.IntercomOffset);
+               
+                ClientStateSingleton.Instance.LastSent = 0; //force refresh
+            }
+            catch (Exception)
+            {
+                //ignore 
+            }
+    }
 }
